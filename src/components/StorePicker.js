@@ -27,6 +27,8 @@ class StorePicker extends React.Component {
   }
 }
 
+// Use Context to surface our router for the StorePicker object.
+// Tells React that the StorePicker component expects a router property.
 StorePicker.contextTypes = {
   router: React.PropTypes.object
 }
