@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
+import sampleFishes from '../sample-fishes';
 
 class App extends React.Component {
   constructor() {
@@ -9,8 +10,9 @@ class App extends React.Component {
     // Required in the constructor
     super();
 
-    // Binds the addFish method to App when it is initialised
-    this.addFish = this.addFish.bind(this);
+    // Binds the methods to App when it is initialised
+    this.addFish      = this.addFish.bind(this);
+    this.sampleFishes = this.sampleFishes.bind(this);
 
     // Define the initial state when App is initialized
     this.state = {
@@ -35,6 +37,11 @@ class App extends React.Component {
     console.log(this);
   }
 
+  sampleFishes() {
+    // Adds the fish objects from sample-fishes to App's fishes state.
+    this.setState({fishes: sampleFishes});
+  }
+
   render() {
     return(
       <div className='catch-of-the-day'>
@@ -42,7 +49,7 @@ class App extends React.Component {
           <Header tagline='Fresh Seafood Market'/>
         </div>
         <Order/>
-        <Inventory addFish={this.addFish} />
+        <Inventory addFish={this.addFish} sampleFishes={this.sampleFishes} />
       </div>
     )
   }
