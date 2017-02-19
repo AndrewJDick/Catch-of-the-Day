@@ -14,6 +14,7 @@ class App extends React.Component {
     // Binds the methods to App when it is initialised
     this.addFish      = this.addFish.bind(this);
     this.sampleFishes = this.sampleFishes.bind(this);
+    this.addToOrder   = this.addToOrder.bind(this);
 
     // Define the initial state when App is initialized
     this.state = {
@@ -38,6 +39,19 @@ class App extends React.Component {
     console.log(this);
   }
 
+  addToOrder(key) {
+
+    // Take a copy of the current state when the method is called
+    const order = {...this.state.order};
+
+    // Update or add the new number of fish ordered
+    order[key] = order[key] + 1 || 1;
+
+    // Finally, update the state. ({order}) is shorthand for ({order: order})
+    this.setState({order});
+
+  }
+
   sampleFishes() {
     // Adds the fish objects from sample-fishes to App's fishes state.
     this.setState({fishes: sampleFishes});
@@ -53,7 +67,7 @@ class App extends React.Component {
             {
               Object
                 .keys(this.state.fishes)
-                .map(key => <Fish key={key} details={this.state.fishes[key]} />)
+                .map(key => <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder} />)
             }
           </ul>
         </div>
