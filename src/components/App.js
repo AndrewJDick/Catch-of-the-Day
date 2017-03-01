@@ -14,6 +14,7 @@ class App extends React.Component {
 
     // Binds the methods to App when it is initialised
     this.addFish      = this.addFish.bind(this);
+    this.updateFish   = this.updateFish.bind(this);
     this.sampleFishes = this.sampleFishes.bind(this);
     this.addToOrder   = this.addToOrder.bind(this);
 
@@ -69,6 +70,13 @@ class App extends React.Component {
     console.log(this);
   }
 
+  updateFish(key, updatedFish) {
+
+    const fishes = {...this.state.fishes};
+    fishes[key] = updatedFish;
+    this.setState({ fishes });
+  }
+
   addToOrder(key) {
 
     // Take a copy of the current state when the method is called
@@ -102,7 +110,7 @@ class App extends React.Component {
           </ul>
         </div>
         <Order params={this.props.params} fishes={this.state.fishes} order={this.state.order}/>
-        <Inventory addFish={this.addFish} sampleFishes={this.sampleFishes} />
+        <Inventory fishes={this.state.fishes} addFish={this.addFish} updateFish={this.updateFish} sampleFishes={this.sampleFishes} />
       </div>
     )
   }
