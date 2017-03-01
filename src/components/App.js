@@ -15,8 +15,10 @@ class App extends React.Component {
     // Binds the methods to App when it is initialised
     this.addFish      = this.addFish.bind(this);
     this.updateFish   = this.updateFish.bind(this);
+    this.removeFish   = this.removeFish.bind(this);
     this.sampleFishes = this.sampleFishes.bind(this);
     this.addToOrder   = this.addToOrder.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
 
     // Define the initial state when App is initialized
     this.state = {
@@ -77,6 +79,14 @@ class App extends React.Component {
     this.setState({ fishes });
   }
 
+  removeFish(key) {
+
+    const fishes = {...this.state.fishes};
+    // Firebase requires it to be set to null, rather than using delete
+    fishes[key] = null;
+    this.setState({ fishes });
+  }
+
   addToOrder(key) {
 
     // Take a copy of the current state when the method is called
@@ -88,6 +98,15 @@ class App extends React.Component {
     // Finally, update the state. ({order}) is shorthand for ({order: order})
     this.setState({order});
 
+  }
+
+  removeFromOrder(key) {
+
+    const order = {...this.state.order};
+
+    delete order[key];
+
+    this.setState({order})
   }
 
   sampleFishes() {
@@ -109,8 +128,8 @@ class App extends React.Component {
             }
           </ul>
         </div>
-        <Order params={this.props.params} fishes={this.state.fishes} order={this.state.order}/>
-        <Inventory fishes={this.state.fishes} addFish={this.addFish} updateFish={this.updateFish} sampleFishes={this.sampleFishes} />
+        <Order params={this.props.params} fishes={this.state.fishes} order={this.state.order} removeFromOrder={this.removeFromOrder} />
+        <Inventory fishes={this.state.fishes} addFish={this.addFish} updateFish={this.updateFish} removeFish={this.removeFish} sampleFishes={this.sampleFishes} />
       </div>
     )
   }
