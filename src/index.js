@@ -11,10 +11,13 @@ import App from './components/App';
 import StorePicker from './components/StorePicker';
 import NotFound from './components/NotFound';
 
+// Repo name for hosting on Github pages
+const repo = `/${window.location.pathname.split('/')[1]}`;
+
 // Component
 const Root = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={repo}>
       { /* Looks like Match cannot be a direct child of BrowserRouter */ }
       <div>
         <Match exactly pattern='/' component={ StorePicker } />
